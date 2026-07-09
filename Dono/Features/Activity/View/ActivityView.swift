@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  ActivityView.swift
 //  Dono
 //
 //  Created by Bahtiar on 09/07/26.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct ActivityView: View {
     var body: some View {
         VStack {
-            Text("HomeView")
+            Text("Activity View")
         }
     }
 }
 
 #Preview {
-    HomeView()
+    ActivityView()
 }
