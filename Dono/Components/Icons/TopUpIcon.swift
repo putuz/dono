@@ -29,7 +29,7 @@ struct TopUpIcon: View {
             PlusShape(armThickness: 0.24)
                 .fill(colorPlus)
                 .frame(width: size * 0.24, height: size * 0.24)
-                .offset(y: size * 0.04)
+                .offset(x: -size * 0.02, y: size * 0.04)
         }
         .frame(width: size, height: size)
     }

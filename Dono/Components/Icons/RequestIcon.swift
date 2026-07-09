@@ -10,7 +10,8 @@ import SwiftUI
 struct RequestIcon: View {
     var size: CGFloat = 96
     var colorShape: Color = Color.gray
-    var colorPlus: Color = Color.white
+    var colorFont: Color = Color.gray
+    var iconSize: CGFloat = 14
  
     var body: some View {
         ZStack {
@@ -26,9 +27,10 @@ struct RequestIcon: View {
                 .offset(x: size * 0.22, y: -size * 0.22)
  
             Text("Rp")
-                .font(.system(size: 22, weight: .bold))
+                .foregroundStyle(colorFont)
+                .font(.system(size: iconSize, weight: .bold))
                 .frame(width: size * 0.30, height: size * 0.30)
-                .offset(y: size * 0.04)
+                .offset(x: -size * 0.02, y: size * 0.04)
         }
         .frame(width: size, height: size)
     }

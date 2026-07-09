@@ -9,21 +9,30 @@ import SwiftUI
 
 // MARK: - Composed icon
 struct EnvelopeIcon: View {
-    var backgroundColor: Color = Color(red: 0.30, green: 0.60, blue: 0.92)
     var size: CGFloat = 96
- 
+    var colorShape: Color = Color.gray
+    var colorFont: Color = Color.gray
+    var iconSize: CGFloat = 14
+
     var body: some View {
         ZStack {
-            RoundedSquareOutline(cornerRadius: size * 0.05)
-                .stroke(Color.gray, lineWidth: size * 0.05)
-                .frame(width: size * 0.62, height: size * 0.5)
  
-            EnvelopeFlap()
-                .stroke(Color.gray, style: StrokeStyle(
-                    lineWidth: size * 0.07, lineCap: .round, lineJoin: .round
-                ))
-                .frame(width: size * 0.34, height: size * 0.16)
-                .offset(y: -size * 0.02)
+            OpenBracketFrame(cornerRadius: size * 0.12, gapSize: 0.26)
+                .stroke(colorShape, lineWidth: size * 0.045)
+                .frame(width: size * 0.6, height: size * 0.6)
+                .offset(x: -size * 0.02, y: size * 0.06)
+ 
+            Image(systemName: "chevron.down.circle")
+                .resizable()
+                .foregroundStyle(colorShape)
+                .frame(width: size * 0.20, height: size * 0.20)
+                .offset(x: size * 0.23, y: -size * 0.20)
+ 
+            Image(systemName: "envelope")
+                .foregroundStyle(colorFont)
+                .font(.system(size: iconSize, weight: .bold))
+                .frame(width: size * 0.30, height: size * 0.30)
+                .offset(y: size * 0.04)
         }
         .frame(width: size, height: size)
     }
