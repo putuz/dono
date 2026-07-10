@@ -51,6 +51,7 @@ struct ContentView: View {
                         showPaySheet = true
                     }
                 )
+                .padding(.bottom)
             }
             .ignoresSafeArea(edges: .bottom)
             .navigationDestination(isPresented: $showActivity) {

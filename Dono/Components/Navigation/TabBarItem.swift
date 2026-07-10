@@ -30,6 +30,7 @@ struct TabBarItem: View {
                 }
             }
             Text(tab.title)
+                .fontWeight(.semibold)
                 .font(.system(size: 13))
         }
         .foregroundStyle(isSelected ? .primary : .secondary)

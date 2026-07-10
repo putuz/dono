@@ -17,10 +17,7 @@ struct CustomTabBar: View {
  
     var body: some View {
         ZStack(alignment: .top) {
- 
-            Color(.systemBackground)
-                .frame(height: 64)
-                .shadow(color: .black.opacity(0.06), radius: 6, y: -2)
+
  
             HStack(spacing: 0) {
  

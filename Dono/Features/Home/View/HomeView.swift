@@ -85,8 +85,19 @@ struct HomeView: View {
                             SubHeaderItem(title: "iPhone 17", subtitle: "Siap Kamu Klaim"),
                             SubHeaderItem(title: "Beli VIP Pass", subtitle: "& Dapetin Hadiahnya")
                         ])
+                        .padding(.bottom, 10)
 
                         LazyVStack(spacing: 12) {
+                            MenuGrid(items: [
+                                MenuItem(icon: "gift.fill", label: "Daily Rewards", onTap: { print("Daily Rewards") }),
+                                MenuItem(icon: "circle.hexagonpath.fill", label: "DANA Points", onTap: { print("DANA Points") }),
+                                MenuItem(icon: "gift.circle.fill", label: "Redeem Rewards", onTap: { print("Redeem Rewards") }),
+                                MenuItem(icon: "apple.logo", label: "Apple Zone", onTap: { print("Apple Zone") }),
+                                MenuItem(icon: "creditcard.fill", label: "Pulsa & Data", onTap: { print("Pulsa & Data") }),
+                                MenuItem(icon: "bolt.fill", label: "Electricity", onTap: { print("Electricity") }),
+                                MenuItem(icon: "star.circle.fill", label: "A+ Rewards", onTap: { print("A+ Rewards") }),
+                                MenuItem(icon: "square.grid.2x2.fill", label: "View All", onTap: { print("View All") })
+                            ])
                             ForEach(0..<6, id: \.self) { i in
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(Color.gray.opacity(0.15))
@@ -96,7 +107,7 @@ struct HomeView: View {
                                     .id(i)
                             }
                         }
-                        .padding(.top, 12)
+                        .padding(.vertical)
                         .background(Color.white)
                     }
                     .scrollIndicators(.never)
@@ -117,6 +128,8 @@ struct HomeView: View {
         }
     }
 }
+
+
 
 #Preview {
     HomeView()

@@ -25,5 +25,6 @@ struct FloatingPayButton: View {
             .shadow(color: .blue.opacity(0.35), radius: 10, y: 4)
         }
         .offset(y: -28)
+        .buttonStyle(.plain)
     }
 }
