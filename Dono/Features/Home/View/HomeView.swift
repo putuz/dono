@@ -13,16 +13,16 @@ struct HomeView: View {
     private func refreshData() async {
         try? await Task.sleep(nanoseconds: 1_000_000_000)
     }
-
+    
     var body: some View {
         VStack(spacing: 0) {
             StickyBalanceHeader()
-
+            
             ZStack(alignment: .top) {
                 Color.blue
                     .frame(height: 400)
                     .ignoresSafeArea(edges: .top)
-
+                
                 ScrollViewReader { proxy in
                     ScrollView {
                         HStack(spacing: 30) {
@@ -38,7 +38,7 @@ struct HomeView: View {
                                 }
                             }
                             .buttonStyle(.plain)
-
+                            
                             Button {
                                 print("Request Tapped")
                             } label: {
@@ -51,7 +51,7 @@ struct HomeView: View {
                                 }
                             }
                             .buttonStyle(.plain)
-
+                            
                             Button {
                                 print("Send Tapped")
                             } label: {
@@ -64,7 +64,7 @@ struct HomeView: View {
                                 }
                             }
                             .buttonStyle(.plain)
-
+                            
                             Button {
                                 print("Inbox Tapped")
                             } label: {
@@ -86,7 +86,7 @@ struct HomeView: View {
                             SubHeaderItem(title: "Beli VIP Pass", subtitle: "& Dapetin Hadiahnya")
                         ])
                         .padding(.bottom, 10)
-
+                        
                         LazyVStack(spacing: 12) {
                             MenuGrid(items: [
                                 MenuItem(icon: "gift.fill", label: "Daily Rewards", onTap: { print("Daily Rewards") }),
@@ -98,7 +98,41 @@ struct HomeView: View {
                                 MenuItem(icon: "star.circle.fill", label: "A+ Rewards", onTap: { print("A+ Rewards") }),
                                 MenuItem(icon: "square.grid.2x2.fill", label: "View All", onTap: { print("View All") })
                             ])
-                            ForEach(0..<6, id: \.self) { i in
+                            
+                            Feed(items: [
+                                FeedItem(
+                                    brand: "DANA",
+                                    text: "backs a team at ⚽️",
+                                    emoji: nil,
+                                    linkText: "Festival Bola Dunia",
+                                    onTapLink: { print("Festival Bola Dunia tapped") }
+                                ),
+                                FeedItem(
+                                    brand: "DANA",
+                                    text: "Play",
+                                    emoji: "🕹️",
+                                    linkText: "Joy Games for Double Beans",
+                                    onTapLink: { print("Joy Games tapped") }
+                                ),
+                                FeedItem(
+                                    brand: "DANA",
+                                    text: "Play",
+                                    emoji: "🕹️",
+                                    linkText: "Joy Games for Double Beans",
+                                    onTapLink: { print("Joy Games tapped") }
+                                ),
+                                FeedItem(
+                                    brand: "DANA",
+                                    text: "Play",
+                                    emoji: "🕹️",
+                                    linkText: "Joy Games for Double Beans",
+                                    onTapLink: { print("Joy Games tapped") }
+                                )
+                            ])
+                            
+                            Carousel(images: ["carouselHome1", "carouselHome2", "carouselHome3", "carouselHome4"])
+                            
+                            ForEach(0..<3, id: \.self) { i in
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(Color.gray.opacity(0.15))
                                     .frame(height: 200)
