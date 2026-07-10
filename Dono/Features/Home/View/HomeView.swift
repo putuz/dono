@@ -9,6 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     var scrollToTopTrigger: Int = 0
+    
+    private func refreshData() async {
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -76,6 +80,11 @@ struct HomeView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .background(Color.blue)
+                        
+                        SubHeader(items: [
+                            SubHeaderItem(title: "iPhone 17", subtitle: "Siap Kamu Klaim"),
+                            SubHeaderItem(title: "Beli VIP Pass", subtitle: "& Dapetin Hadiahnya")
+                        ])
 
                         LazyVStack(spacing: 12) {
                             ForEach(0..<6, id: \.self) { i in
@@ -92,6 +101,12 @@ struct HomeView: View {
                     }
                     .scrollIndicators(.never)
                     .scrollContentBackground(.hidden)
+                    .refreshable(action: {
+                        await refreshData()
+                    })
+                    .onAppear {
+                        UIRefreshControl.appearance().tintColor  = .white
+                    }
                     .onChange(of: scrollToTopTrigger) { _, _ in
                         withAnimation(.easeInOut(duration: 0.3)) {
                             proxy.scrollTo(0, anchor: .top)
