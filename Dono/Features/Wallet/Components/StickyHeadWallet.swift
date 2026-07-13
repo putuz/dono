@@ -7,6 +7,53 @@
 
 import SwiftUI
 
+struct AddPaymentMethodSheet: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Add Payment Method")
+                .font(.system(size: 18, weight: .semibold))
+
+            VStack(spacing: 12) {
+                AddOptionRow(icon: "creditcard", title: "Debit / Credit Card")
+                AddOptionRow(icon: "building.columns", title: "Bank Account")
+                AddOptionRow(icon: "banknote", title: "E-Wallet")
+            }
+
+            Spacer()
+        }
+        .padding(20)
+        .padding(.top, 8)
+    }
+}
+
+struct AddOptionRow: View {
+    let icon: String
+    let title: String
+
+    var body: some View {
+        HStack(spacing: 14) {
+            Image(systemName: icon)
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(.blue)
+                .frame(width: 32, height: 32)
+                .background(Color.blue.opacity(0.1))
+                .clipShape(Circle())
+
+            Text(title)
+                .font(.system(size: 15, weight: .medium))
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundColor(.gray)
+        }
+        .padding(.vertical, 4)
+    }
+}
+
 struct StickyHeadWallet: View {
     var body: some View {
         // Pakai padding (bukan offset) supaya tinggi search bar yang
@@ -22,32 +69,31 @@ struct StickyHeadWallet: View {
  
 // MARK: - Header yang menempel (sticky)
 struct WalletStickyHeader: View {
- 
+    @State private var showAddSheet = false
+
     var body: some View {
-        // "Wallet" diletakkan di ZStack supaya posisinya benar-benar center,
-        // tidak terpengaruh lebar konten kiri (DANA PROTECTION) atau kanan (tombol +)
         ZStack {
             Text("Wallet")
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(.white)
- 
+
             HStack {
                 HStack(spacing: 8) {
                     Image(systemName: "lock.fill")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
- 
+
                     Text("DANA\nPROTECTION")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(.white)
                         .lineSpacing(1)
                         .fixedSize(horizontal: false, vertical: true)
                 }
- 
+
                 Spacer()
- 
+
                 Button {
-                    // aksi tambah
+                    showAddSheet = true
                 } label: {
                     Image(systemName: "plus")
                         .font(.system(size: 16, weight: .bold))
@@ -63,6 +109,11 @@ struct WalletStickyHeader: View {
         .padding(.bottom, 24)
         .frame(maxWidth: .infinity)
         .background(.blue)
+        .sheet(isPresented: $showAddSheet) {
+            AddPaymentMethodSheet()
+                .presentationDetents([.height(280), .medium])
+                .presentationDragIndicator(.visible)
+        }
     }
 }
  
