@@ -42,7 +42,7 @@ struct ShimmerRewardButton: View {
                     )
             }
             .clipped()
-            .padding(.horizontal, 14)
+            .padding(.horizontal, 8)
             .padding(.vertical, 8)
             .background(
                 ZStack {

@@ -44,7 +44,7 @@ struct MenuGrid: View {
         .padding()
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .padding(.horizontal, 10)
+        .padding(.horizontal)
         .shadow(radius: 2)
         .padding(.top, -30)
     }

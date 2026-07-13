@@ -1,5 +1,5 @@
 //
-//  SubHeader.swift
+//  SubHeaderHome.swift
 //  Dono
 //
 //  Created by Bahtiar on 10/07/26.
@@ -12,7 +12,7 @@ struct SubHeaderItem {
     let subtitle: String
 }
 
-struct SubHeader: View {
+struct SubHeaderHome: View {
     let items: [SubHeaderItem]
     @State private var currentIndex = 0
     let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
@@ -61,5 +61,5 @@ struct SubHeader: View {
 }
 
 #Preview {
-    SubHeader(items: [SubHeaderItem(title: "iPhone 17", subtitle: "Siap Kamu Klaim"), SubHeaderItem(title: "Beli VIP Pass", subtitle: "& Dapetin Hadiahnya")])
+    SubHeaderHome(items: [SubHeaderItem(title: "iPhone 17", subtitle: "Siap Kamu Klaim"), SubHeaderItem(title: "Beli VIP Pass", subtitle: "& Dapetin Hadiahnya")])
 }

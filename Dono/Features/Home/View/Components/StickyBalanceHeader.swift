@@ -46,3 +46,7 @@ struct StickyBalanceHeader: View {
         .background(Color.blue)
     }
 }
+
+#Preview {
+    StickyBalanceHeader(balanceText: "1.234.550", onRewardTap: {})
+}

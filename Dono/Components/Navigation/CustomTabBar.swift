@@ -79,3 +79,32 @@ struct CustomTabBar: View {
         .buttonStyle(.plain)
     }
 }
+
+#Preview {
+    PreviewContainer()
+}
+
+private struct PreviewContainer: View {
+
+    @State private var selectedTab: AppTab = .home
+
+    var body: some View {
+        VStack {
+            Spacer()
+
+            CustomTabBar(
+                selectedTab: $selectedTab,
+                onHomeTapped: {
+                    print("Home")
+                },
+                onActivityTapped: {
+                    print("Activity")
+                },
+                onPayTapped: {
+                    print("Pay")
+                }
+            )
+        }
+        .background(Color(.systemBackground))
+    }
+}
