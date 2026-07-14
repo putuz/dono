@@ -8,49 +8,105 @@
 import SwiftUI
 
 struct AddPaymentMethodSheet: View {
-    @Environment(\.dismiss) private var dismiss
+
+    private let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Add Payment Method")
-                .font(.system(size: 18, weight: .semibold))
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                Text("Add Payment Method")
+                    .font(.system(size: 18, weight: .semibold))
+                    .padding(.top, 8)
 
-            VStack(spacing: 12) {
-                AddOptionRow(icon: "creditcard", title: "Debit / Credit Card")
-                AddOptionRow(icon: "building.columns", title: "Bank Account")
-                AddOptionRow(icon: "banknote", title: "E-Wallet")
+                PaymentSection(
+                    title: "Save the Payment Methods",
+                    options: [
+                        AddOption(icon: "creditcard", title: "Bank Cards"),
+                        AddOption(icon: "building.columns", title: "Bank Account")
+                    ],
+                    columns: columns
+                )
+
+                PaymentSection(
+                    title: "Invest Time",
+                    options: [
+                        AddOption(icon: "cube.fill", title: "eMAS"),
+                        AddOption(icon: "target", title: "DANA Goals"),
+                        AddOption(icon: "plus.circle.fill", title: "DANA+")
+                    ],
+                    columns: columns
+                )
+
+                PaymentSection(
+                    title: "Voucher & Ticket Purchase",
+                    options: [
+                        AddOption(icon: "tag.fill", title: "DANA Deals"),
+                        AddOption(icon: "star.fill", title: "A+ Rewards")
+                    ],
+                    columns: columns
+                )
             }
-
-            Spacer()
+            .padding(20)
         }
-        .padding(20)
-        .padding(.top, 8)
+        .scrollIndicators(.never)
     }
 }
 
-struct AddOptionRow: View {
+// MARK: - Model opsi per item
+struct AddOption: Identifiable {
+    let id = UUID()
+    let icon: String
+    let title: String
+}
+
+// MARK: - Section reusable (judul + grid)
+struct PaymentSection: View {
+    let title: String
+    let options: [AddOption]
+    let columns: [GridItem]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(title.uppercased())
+                .font(.system(size: 12, weight: .bold))
+                .foregroundColor(.gray)
+
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(options) { option in
+                    AddOptionGridItem(icon: option.icon, title: option.title)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Item grid satuan (icon bulat + label di bawah)
+struct AddOptionGridItem: View {
     let icon: String
     let title: String
 
     var body: some View {
-        HStack(spacing: 14) {
-            Image(systemName: icon)
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.blue)
-                .frame(width: 32, height: 32)
-                .background(Color.blue.opacity(0.1))
-                .clipShape(Circle())
+        Button {
+            // aksi tap menu
+        } label: {
+            VStack(spacing: 8) {
+                Image(systemName: icon)
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.blue)
+                    .frame(width: 52, height: 52)
+                    .background(Color.blue.opacity(0.1))
+                    .clipShape(Circle())
 
-            Text(title)
-                .font(.system(size: 15, weight: .medium))
-
-            Spacer()
-
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.gray)
+                Text(title)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity)
         }
-        .padding(.vertical, 4)
+        .buttonStyle(.plain)
     }
 }
 
@@ -83,7 +139,7 @@ struct WalletStickyHeader: View {
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
 
-                    Text("DANA\nPROTECTION")
+                    Text("DONO\nPROTECTION")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(.white)
                         .lineSpacing(1)
@@ -111,7 +167,7 @@ struct WalletStickyHeader: View {
         .background(.blue)
         .sheet(isPresented: $showAddSheet) {
             AddPaymentMethodSheet()
-                .presentationDetents([.height(280), .medium])
+                .presentationDetents([.height(280)])
                 .presentationDragIndicator(.visible)
         }
     }

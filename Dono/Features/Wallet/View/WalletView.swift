@@ -12,7 +12,32 @@ struct WalletView: View {
         try? await Task.sleep(nanoseconds: 1_000_000_000)
     }
     
-    let cards: [PaymentCardModel] = []
+    let cards: [PaymentCardModel] = [
+        PaymentCardModel(
+            iconSystemName: "wallet.pass.fill",
+            issuerName: "DANA",
+            cardNumber: "•••• •••• •••• 4821",
+            description: "Saldo DANA kamu",
+            gradientColors: [Color(red: 0.06, green: 0.47, blue: 0.98), Color(red: 0.02, green: 0.28, blue: 0.85)],
+            primaryActionTitle: "OPEN"
+        ),
+        PaymentCardModel(
+            iconSystemName: "building.columns.fill",
+            issuerName: "BCA",
+            cardNumber: "•••• •••• •••• 1092",
+            description: "Kartu Debit BCA",
+            gradientColors: [Color(red: 0.0, green: 0.35, blue: 0.75), Color(red: 0.0, green: 0.16, blue: 0.45)],
+            primaryActionTitle: "OPEN"
+        ),
+        PaymentCardModel(
+            iconSystemName: "creditcard.fill",
+            issuerName: "Mandiri",
+            cardNumber: "•••• •••• •••• 7734",
+            description: "Kartu Kredit Mandiri",
+            gradientColors: [Color(red: 0.95, green: 0.65, blue: 0.05), Color(red: 0.85, green: 0.35, blue: 0.02)],
+            primaryActionTitle: "OPEN"
+        )
+    ]
  
     var body: some View {
         VStack(spacing: 0) {
@@ -60,42 +85,6 @@ struct PaymentCardModel: Identifiable {
     let description: String         // teks kecil di bawah nomor kartu
     let gradientColors: [Color]     // warna gradient header kartu
     let primaryActionTitle: String  // contoh: "OPEN"
-}
- 
-// MARK: - Section "PAYMENT METHOD" (menampilkan banyak kartu)
-struct PaymentMethodSection: View {
-    let cards: [PaymentCardModel]
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("PAYMENT METHOD")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.gray)
-
-                Spacer()
-
-                Text("\(cards.count) CARD")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.gray)
-            }
-
-            if cards.isEmpty {
-                ContentUnavailableView(
-                    "No Payment Method",
-                    systemImage: "creditcard",
-                    description: Text("Add a payment method to get started.")
-                )
-            } else {
-                VStack(spacing: 16) {
-                    ForEach(cards) { card in
-                        PaymentCard(card: card)
-                    }
-                }
-            }
-        }
-        .padding(.horizontal, 20)
-    }
 }
 
 #Preview {

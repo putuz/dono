@@ -59,10 +59,8 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showPaySheet) {
-            VStack {
-                Text("Pay QR")
-            }
-            .presentationDetents([.medium])
+            PayView()
+                .presentationDetents([.medium])
         }
     }
 }
